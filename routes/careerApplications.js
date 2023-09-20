@@ -11,8 +11,13 @@ const getCareerApplication = require('../controllers/careerApplications/getCaree
 const deleteCareerApplication = require('../controllers/careerApplications/deleteCareerApplication');
 const updateCareerApplication = require('../controllers/careerApplications/updateCareerApplication');
 
-const storage = multer.memoryStorage(); // Use memory storage to store the file in memory
-const upload = multer({ storage: storage });
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10 MB limit
+  }
+});
 
 router.get('/', getAllCareerApplications);
 

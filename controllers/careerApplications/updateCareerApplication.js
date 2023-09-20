@@ -2,7 +2,7 @@ const CareerApplication = require('../../db/model/careerApplication');
 
 async function updateCareerApplication(req, res) {
   const { careerApplicationID } = req.params;
-  const { fullName, email, phone, resume, applicationStatus, additionalNotes } =
+  const { fullName, email, phone, applicationStatus, additionalNotes } =
     req.body;
 
   if (!careerApplicationID) {
@@ -29,7 +29,6 @@ async function updateCareerApplication(req, res) {
       fullName || updatedCareerApplication.fullName;
     updatedCareerApplication.email = email || updatedCareerApplication.email;
     updatedCareerApplication.phone = phone || updatedCareerApplication.phone;
-    updatedCareerApplication.resume = resume || updatedCareerApplication.resume;
     updatedCareerApplication.additionalNotes =
       additionalNotes || updatedCareerApplication.additionalNotes;
     updatedCareerApplication.applicationStatus =

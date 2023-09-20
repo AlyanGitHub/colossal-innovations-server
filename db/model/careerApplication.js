@@ -28,14 +28,14 @@ const careerApplicationSchema = new mongoose.Schema({
   applicationStatus: {
     type: String,
     enum: [
-      'Submitted',
-      'Shortlisted',
-      'Rejected',
-      'Interview Scheduled',
-      'Offer Extended',
-      'Hired'
+      'SUBMITTED',
+      'SHORTLISTED',
+      'REJECTED',
+      'INTERVIEW SCHEDULED',
+      'OFFER EXTENDED',
+      'HIRED'
     ],
-    default: 'Submitted'
+    default: 'SUBMITTED'
   },
   career: {
     type: mongoose.Schema.Types.ObjectId,
