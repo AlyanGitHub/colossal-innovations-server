@@ -14,8 +14,32 @@ const careerApplicationSchema = new mongoose.Schema({
     required: true
   },
   resume: {
-    data: Buffer, // Store the PDF data as binary
-    contentType: String // Specify the content type, e.g., 'application/pdf'
+    data: Buffer,
+    contentType: 'application/pdf'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  additionalNotes: {
+    type: String,
+    default: ''
+  },
+  applicationStatus: {
+    type: String,
+    enum: [
+      'Submitted',
+      'Shortlisted',
+      'Rejected',
+      'Interview Scheduled',
+      'Offer Extended',
+      'Hired'
+    ],
+    default: 'Submitted'
+  },
+  career: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Career'
   }
 });
 
