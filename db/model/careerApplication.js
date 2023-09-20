@@ -15,7 +15,7 @@ const careerApplicationSchema = new mongoose.Schema({
   },
   resume: {
     data: Buffer,
-    contentType: 'application/pdf'
+    contentType: String
   },
   createdAt: {
     type: Date,

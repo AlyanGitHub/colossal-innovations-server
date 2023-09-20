@@ -12,8 +12,8 @@ async function createCareerApplication(req, res) {
     });
   }
 
-  const resumeData = resume.buffer; // Access the file buffer
-  const resumeContentType = resume.mimetype; // Get the content type
+  const resumeData = resume.buffer;
+  const resumeContentType = resume.mimetype;
 
   try {
     const newCareerApplication = await CareerApplication.create({
