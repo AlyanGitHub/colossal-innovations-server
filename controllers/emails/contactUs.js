@@ -20,6 +20,26 @@ async function contactUs(req, res) {
       message
     });
 
+    transporter.sendMail(
+      {
+        from: process.env.TRANSPORTER_USER,
+        to: process.env.TRANSPORTER_USER,
+        subject: subject,
+        text: `Email from: ${name}
+Email address: ${email},
+Message:
+${message}`
+      },
+      function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+          // do something useful
+        }
+      }
+    );
+
     const mailOptions = {
       from: process.env.TRANSPORTER_USER,
       to: email,
