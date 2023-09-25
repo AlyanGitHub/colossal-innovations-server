@@ -1,10 +1,9 @@
+const path = require('path');
 const CareerApplication = require('../../db/model/careerApplication');
 
 async function createCareerApplication(req, res) {
-  const { fullName, email, phone } = req.body;
-  const resume = req.file;
-  console.log('RESUME BUFFER: ', resume.buffer);
-  if (!fullName || !email || !phone || !resume) {
+  const { fullName, email, phone, career } = req.body;
+  if ((!fullName || !email || !phone, !career)) {
     return res.status(400).json({
       success: false,
       data: {},
@@ -12,18 +11,32 @@ async function createCareerApplication(req, res) {
     });
   }
 
-  const resumeData = resume.buffer;
-  const resumeContentType = resume.mimetype;
-
   try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        data: {},
+        message: 'Please attach a resume file'
+      });
+    }
+
+    const filePath = req.file.path;
+
+    // Convert backslashes to forward slashes in the file path
+    const sanitizedFilePath = filePath.replace(/\\/g, '/');
+
+    // Create a URL to access the PDF file
+    const pdfFileURL = `${req.protocol}://${req.get(
+      'host'
+    )}/${sanitizedFilePath}`;
+
+    // Store the PDF file URL directly in MongoDB
     const newCareerApplication = await CareerApplication.create({
       fullName,
       email,
       phone,
-      resume: {
-        data: resumeData,
-        contentType: resumeContentType
-      }
+      career,
+      resumeURL: pdfFileURL
     });
 
     return res.status(201).json({
@@ -32,7 +45,7 @@ async function createCareerApplication(req, res) {
       message: 'Successfully created career application'
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(400).json({
       success: false,
       data: {},

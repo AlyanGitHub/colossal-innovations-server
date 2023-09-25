@@ -13,9 +13,9 @@ const careerApplicationSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  resume: {
-    data: Buffer,
-    contentType: String
+  resumeURL: {
+    type: String,
+    required: true
   },
   createdAt: {
     type: Date,

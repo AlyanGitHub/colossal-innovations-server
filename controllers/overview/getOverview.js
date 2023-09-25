@@ -3,6 +3,7 @@ const Career = require('../../db/model/career');
 const Email = require('../../db/model/email');
 const Project = require('../../db/model/project');
 const User = require('../../db/model/user');
+const CareerApplication = require('../../db/model/careerApplication');
 
 async function getOverview(req, res) {
   try {
@@ -11,13 +12,15 @@ async function getOverview(req, res) {
     const emailsCount = await Email.countDocuments({});
     const projectsCount = await Project.countDocuments({});
     const usersCount = await User.countDocuments({});
+    const careerApplicationsCount = await CareerApplication.countDocuments({});
 
     const overview = {
       blogs: blogsCount,
       careers: careersCount,
       emails: emailsCount,
       projects: projectsCount,
-      users: usersCount
+      users: usersCount,
+      careerApplications: careerApplicationsCount
     };
 
     return res.status(201).json({

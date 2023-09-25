@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path');
 dotenv.config();
 const express = require('express');
 const app = express();
@@ -20,6 +21,8 @@ connectDB();
 app.use(express.json());
 
 app.use(cors());
+
+app.use('/resumes', express.static(path.join(__dirname, 'resumes')));
 
 app.use(express.urlencoded({ extended: true }));
 
