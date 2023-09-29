@@ -3,7 +3,6 @@ const { transporter } = require('../../mailer');
 
 async function contactUs(req, res) {
   const { name, email, message, subject } = req.body;
-
   if (!name || !email || !message || !subject) {
     return res.status(400).json({
       success: false,
@@ -35,7 +34,6 @@ ${message}`
           console.log(error);
         } else {
           console.log('Email sent: ' + info.response);
-          // do something useful
         }
       }
     );
@@ -61,7 +59,6 @@ Colossal Innovations`
         });
       } else {
         console.log('Email sent: ' + info.response);
-        // do something useful
       }
     });
 
